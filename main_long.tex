@@ -1,0 +1,212 @@
+\documentclass{article}
+%\documentclass{aastex63}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+%-- Journal definitions for the bibliography
+\def\latex{\LaTeX{}}
+%\def\apss{Ap\&SS}             % Astrophysics and Space Science
+\def\aap{Astron.\ Astrophys.}                % Astronomy and Astrophysics
+\def\aaps{Astron.\ Astrophys.\ Suppl.\ Ser.}                % Astronomy and Astrophysics
+%\def\aapr{A\&A~Rev.}          % Astronomy and Astrophysics Reviews
+%\def\pasa{PASA}	% Publications of the Astronomical Society of Australia
+%\def\aplett{ApL}	 % Astrophysics Letters
+%\def\nar{NewAR}          % New astronomy reviews
+%\def\physrep{Phys.~Rep} % Physics reports
+%\def\prd{Phys.~Rev.~D} % Physics reports
+
+\def\aap{Astron. \& Astrophys.}                % Astronomy and Astrophysics
+\newcommand{\aj}{Astron. J.}
+\newcommand{\apjs}{The Astrophysical Journal}
+\newcommand{\apj}{The Astrophysical Journal}
+\newcommand{\apjl}{ApJ Lett.}
+\newcommand{\mnras}{Mon. Not. R. Astro. Soc.}
+\newcommand{\pasa}{Publ. Astron. Soc. Australia}
+\newcommand{\nat}{Nature}
+\newcommand{\sci}{Science}
+\newcommand{\jcap}{J.Cosmol.Astropart.Phys.}
+\newcommand{\procspie}{Proc. SPIE.}
+\newcommand{\pasp}{Pub. Astron. Soc. Pacific}
+\newcommand{\annrevastro}{Annu. Rev. Astron. Astrophys.}
+\newcommand{\araa}{Annu. Rev. Astron. Astrophys.}
+
+\title{Notes on GR 0 \\ Review of SR \& Introduction to vector and tensor algebra}
+\author{Hyerin Cho}
+%\date{\today}
+\date{\vspace{-5ex}}
+
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section] % reset theorem numbering for each section
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example} % same for example numbers
+
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+%% Enable block commenting
+\usepackage[]{verbatim}
+
+%% Enable textcolor
+\usepackage{color}
+
+\usepackage{tensor}
+\usepackage{braket}
+
+\graphicspath{{./}{figures/}}
+
+\begin{document}
+
+\maketitle
+
+\section{Special Relativity} \label{sec:sr}
+
+\subsection{Invariance of an interval}
+\begin{eqnarray}
+    \Delta s^2 & = & - (\Delta t)^2 + (\Delta x)^2\\
+    \Delta s^2 & = & \Delta \bar{s}^2  
+\end{eqnarray}
+
+\begin{defn} Proper time \end{defn} \label{eq:tau}
+\begin{equation}
+    d\tau^2 = -d\vec{x} \cdot d\vec{x} = -ds^2
+\end{equation}
+
+\subsection{Lorentz transformation}
+\begin{itemize}
+  \item $\bar{t} = \frac{t}{\sqrt{(1-v^2)}} - \frac{v x}{\sqrt{(1-v^2)}}$
+  \item $\bar{x} = \frac{-v t}{\sqrt{(1-v^2)}} + \frac{x}{\sqrt{(1-v^2)}}$
+  \item $\bar{y} = y$
+  \item $\bar{z} = z$
+\end{itemize}
+
+\subsection{Velocity composition law}
+
+\begin{equation}
+    W = \frac{\Delta x}{\Delta t} = \frac{\bar{W}+v}{1+\bar{W}v}
+\end{equation}
+where $\bar{W} = \Delta \bar{x} / \Delta \bar{t}$. Classical limit goes to Galilean law of velocity addition $W = \bar{W} + v$.
+
+\section{Vector Algebra} \label{sec:va}
+
+\subsection{Basics}
+\begin{enumerate}
+    \item Definition of a vector $\Delta \vec{x} \rightarrow \Delta x^\alpha$ ($\alpha,\beta, \dots = 0,1,2,3$ and $i, j, \dots = 1,2,3$)
+    \item Einstein summation convention $A_\alpha B^{\alpha} = \Sigma_{\alpha=0}^n A_\alpha B^\alpha$
+    \item Basis vectors $\vec{e_\alpha}$: $\vec{A} = A^\alpha \vec{e_\alpha}$ \\
+    Basis vectors transform like: $\vec{e_\alpha} = \Lambda\indices{^{\bar{\beta}}_\alpha} \vec{e\indices{_{\bar{\beta}}}}$
+    \item Lorentz transformation matrix $\Delta x^{\bar{\alpha}} = \Lambda\indices{^{\bar{\alpha}}_\beta} \Delta x^{\beta}$\\
+    \begin{eqnarray}
+    [\Lambda\indices{^{\bar{\alpha}}_\beta}] =
+     \left[
+    \begin{array}{cccc}
+    \gamma & -v \gamma & 0 & 0 \\
+    -v \gamma & \gamma & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{array}     \right]\nonumber
+    \end{eqnarray}
+    \item Inverse transformation for $\Lambda\indices{^{\bar{\alpha}}_\beta} = \Lambda\indices{^{\bar{\alpha}}_\beta}(\vec{v})$. 
+    \begin{eqnarray}
+        \Lambda\indices{^{\bar{\alpha}}_\beta} (-\vec{v}) & = & \Lambda\indices{_\beta^{\bar{\alpha}}}\\
+        \Lambda\indices{_{\bar{\beta}}^\nu} \Lambda\indices{^{\bar{\beta}}_\alpha} & = & \delta^\nu_\alpha
+    \end{eqnarray}
+
+\end{enumerate}
+
+\subsection{Four-velocity and four-momentum}
+
+\begin{defn} \textbf{Momentarily comoving reference frame (MCRF)} is an inertial frame which momentarily has the same velocity as the particle. \end{defn} 
+
+\begin{defn} \textbf{Four-velocity $\vec{U}$} of an accelerated particle is $\vec{e_0}$ basis vector of its MCRF at that event. \end{defn}
+
+\begin{defn} \textbf{Four-momentum} $\vec{p} = m \vec{U}$ \end{defn}
+
+\noindent\textit{(example)} Components of $\vec{U}$ and $\vec{p}$ for a particle of rest mass $m$ moving with velocity $\mathbf{v}$ in the $x$ direction.
+\begin{eqnarray}\nonumber
+    U^0 & = & (1-v^2)^{-1/2},\\\nonumber
+    U^1 & = & v(1-v^2)^{-1/2},\\\nonumber 
+    U^2 & = & 0,\\\nonumber
+    U^3 & = & 0
+\end{eqnarray}
+notice it is natural to set $E := p^0$.\\
+
+\subsection{Scalar product}
+\begin{defn} \textbf{Scalar product of two vectors} \end{defn}
+\begin{equation}
+    \vec{A}\cdot\vec{B} = -A^0B^0+A^1B^1+A^2B^2+A^3B^3
+\end{equation}
+
+\begin{defn} \textbf{Orthonormal} \end{defn}
+\begin{equation}
+    \vec{e_\alpha} \cdot \vec{e_\beta} = \eta_{\alpha\beta},
+\end{equation}
+where $\eta_{\alpha\beta}$ is a generalized Kronecker delta (actually a metric).
+
+\subsection{Rather useful expressions}
+\begin{eqnarray}
+    \vec{U} & = & \frac{d\vec{x}}{d\tau},\\
+    \vec{a} & = & \frac{d\vec{U}}{d\tau}, (\vec{U}\cdot\vec{a} = 0)\\
+    E^2 & = & m^2 + \Sigma_i (p^i)^2
+\end{eqnarray}
+
+\subsection{Photons}
+Since $d\vec{x} \cdot d\vec{x} = 0$, $m^2 = -\vec{p}\cdot\vec{p} = 0$. Also notice that a photon has \textit{no} rest frame.
+
+\section{Tensor Algebra} \label{sec:ta}
+
+\subsection{Metric tensor components $\eta_{\alpha\beta}$}
+
+\begin{eqnarray}
+    \vec{A} \cdot \vec{B} & = & A^\alpha B^\beta (\vec{e_\alpha} \cdot \vec{e_\beta})\nonumber\\
+    & = & A^\alpha B^\beta \eta_{\alpha\beta}\nonumber
+\end{eqnarray}
+%This is \textit{frame-invariant} way of writing $-A^0B^0+A^1B^1+A^2B^2+A^3B^3$
+
+\subsection{Definition of tensors}
+
+This part can be as mathematical as you would like, but I avoid the mathematical definitions for this study group. Please read to Ch.3 of \citet{1985schutz} since it is worth checking out mathematical views at some point during your studies.
+\begin{comment}
+\begin{defn} \textbf{Tensor of type $\binom{0}{N}$} is a function of $N$ vectors into the real numbers, which is linear in each of its $N$ arguments. \end{defn}
+
+\noindent \textit{(example)} \textbf{metric tensor} $\mathbf{g}$
+\begin{equation}
+    \mathbf{g}(\vec{A},\vec{B}) := \vec{A} \cdot \vec{B}
+\end{equation}
+
+\begin{defn} \textbf{Components of a tensor} of type $\binom{0}{N}$ are the values of the function when its arguments are the basis vectors ${\vec{e_\alpha}}$ of the frame. $\mathbf{g}(\vec{e_\alpha},\vec{e_\beta})$. \end{defn}
+\end{comment}
+
+But for now, it is enough to accept that a metric is one example of a tensor.
+
+\subsection{Contravariant vectors, Covariant vectors, Tensors}
+
+\begin{defn} \textbf{Contravariant vector} = vectors $p^\alpha$ \end{defn}
+
+\begin{defn} \textbf{Covariant vector} = covector = one-forms $p_\alpha = \eta\indices{_\alpha_\beta} p^\beta$ \end{defn}
+\noindent \textit{(example)} Gradiant is a one-form. $\frac{\partial \phi}{\partial x^\alpha} := \phi_{, \alpha}$, and $\frac{\partial}{\partial x^\alpha} := \partial_{\alpha}$. Then, we see that $x^\alpha_{,\beta} = \delta\indices{^\alpha_\beta}$
+
+\begin{defn} \textbf{contraction} $p^\alpha p_\beta = p_\alpha p^\beta$ \end{defn}
+
+A simple way to think of tensors $T\indices{^{\alpha\beta\cdots}_{\gamma\delta\cdots}}$ is that they are outer products of one-forms and vectors. Index raising and lowering can be done with the help of a metric tensor $\eta_{\mu\nu}$ like the following:
+\begin{equation}
+    T\indices{^{\alpha\beta}_\gamma} = \eta\indices{_{\gamma\mu}} T\indices{^{\alpha\beta\mu}}
+\end{equation}
+
+\noindent \textit{(excercise)} $\eta\indices{^\alpha_\beta}$?
+
+\subsection{Differentiation of tensors}
+\begin{equation}
+    d T\indices{^\alpha_\beta}/ d\tau = T\indices{^\alpha_{\beta,\gamma}} U^\gamma
+\end{equation}
+
+\bibliographystyle{aasjournal}
+\bibliography{references}
+\end{document}
